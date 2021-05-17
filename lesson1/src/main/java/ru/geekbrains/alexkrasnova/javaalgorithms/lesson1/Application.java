@@ -1,6 +1,7 @@
 package ru.geekbrains.alexkrasnova.javaalgorithms.lesson1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Application {
@@ -23,17 +24,24 @@ public class Application {
             cat.printInfo();
         }
 
-        Cat anotherCat = new Cat("Luna", 8);
+        Cat anotherCat = new Cat("Tiger", 13);
 
         long time1 = System.nanoTime();
+        int elementIndex = findElement(cats.toArray(), anotherCat);
+        System.out.println("Spent time, nanoseconds: " + (System.nanoTime() - time1));
 
-        for (Cat cat : cats) {
-            if (cat.equals(anotherCat)) {
-                System.out.println("Cat is found");
-                break;
-            }
+        if (elementIndex != -1) {
+            System.out.println("Cat is found. Element index is " + elementIndex);
         }
 
-        System.out.println("Time, nanoseconds: " + (System.nanoTime() - time1));
+    }
+
+    public static <T> int findElement(T[] array, T soughtForElement) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].equals(soughtForElement)) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
