@@ -23,5 +23,17 @@ public class Application {
             cat.printInfo();
         }
 
+        Cat anotherCat = new Cat("Luna", 8);
+
+        long time1 = System.nanoTime();
+
+        for (Cat cat : cats) {
+            if (cat.equals(anotherCat)) {
+                System.out.println("Cat is found");
+                break;
+            }
+        }
+
+        System.out.println("Time, nanoseconds: " + (System.nanoTime() - time1));
     }
 }
