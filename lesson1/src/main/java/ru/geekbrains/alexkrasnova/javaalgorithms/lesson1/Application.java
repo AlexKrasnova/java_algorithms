@@ -1,13 +1,20 @@
 package ru.geekbrains.alexkrasnova.javaalgorithms.lesson1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import ru.geekbrains.alexkrasnova.javaalgorithms.lesson1.singlylinkedlist.SinglyLinkedList;
+
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
 
+        //Задание к уроку 3
+        testListMethodsAndIterator();
+
+        System.out.println();
+
+        testCustomSinglyLinkedList();
+
+        /*// Задание к уроку 2
         System.out.println("Тестирование методов из класса Arrays: \n");
         testArrayMethods();
 
@@ -15,8 +22,176 @@ public class Application {
         testDifferentSearchingAlgorithms();
 
         System.out.println("\nТестирование различныйх алгоритмов сортироки:\n");
-        testDifferentSortingAlgorithms();
+        testDifferentSortingAlgorithms();*/
 
+        /*// Задание к уроку 1
+        testCatClass();*/
+
+    }
+
+    public static void testCustomSinglyLinkedList() {
+
+        SinglyLinkedList<String> list = new SinglyLinkedList<>();
+
+        list.insert("Jack");
+        list.insert("John");
+        list.insert("Sally");
+        list.insert("Molly");
+        list.insert("Charly");
+
+        list.display();
+
+        System.out.println("Удаляем элемент " + list.delete().getValue());
+
+        list.display();
+
+        System.out.println("Найден элемент " + list.find("Sally"));
+
+    }
+
+    public static void testListMethodsAndIterator() {
+        String[] stringArray = new String[5];
+
+        stringArray[0] = "One";
+        stringArray[1] = "Two";
+        stringArray[2] = "Three";
+        stringArray[3] = "Four";
+        stringArray[4] = "Five";
+
+        // Тестируем методы ArrayList
+        System.out.println("Тестируем ArrayList\n");
+
+        long startTime = System.nanoTime();
+        List<String> stringList = new ArrayList<>(Arrays.asList(stringArray));
+        long arrayToArrayListTime = System.nanoTime() - startTime;
+        Collection<String> stringCollection = new ArrayList<>(Arrays.asList(stringArray));
+        long arrayToCollectionTime = System.nanoTime() - arrayToArrayListTime;
+
+        System.out.println("String[] stringArray = " + Arrays.toString(stringArray));
+        System.out.println("List<String> stringList = " + stringList);
+        System.out.println("Collection<String> stingCollection = " + stringCollection);
+
+        System.out.println();
+
+        startTime = System.nanoTime();
+        stringList.add("Six");
+        long addItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после добавления элемента: " + stringList);
+
+        startTime = System.nanoTime();
+        stringList.add(2, "Another Two");
+        long addItemToPositionTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после добавления элемента в середину списка: " + stringList);
+
+        startTime = System.nanoTime();
+        stringList.set(3, "New Three");
+        long setItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после замены элемента: " + stringList);
+
+        startTime = System.nanoTime();
+        stringList.remove(1);
+        long removeItemByPositionTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после удаления элемента по индексу: " + stringList);
+
+        startTime = System.nanoTime();
+        stringList.remove("Six");
+        long removeItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после удаления элемента: " + stringList);
+
+        System.out.println();
+
+        System.out.printf("Время на конвертацию массива в ArrayList: %d, нс;\n" +
+                        "Время на конвертацию массива в Collection: %d, нс;\n" +
+                        "Время на добавления элемента в  конец в ArrayList: %d, нс;\n" +
+                        "Время на добавления элемента на конкретную позицию в ArrayList: %d, нс;\n" +
+                        "Время на изменение элемента в ArrayList: %d, нс;\n" +
+                        "Время на удаление элемента по индексу из ArrayList: %d, нс;\n" +
+                        "Время на удаление элемента из ArrayList: %d, нс;\n",
+                arrayToArrayListTime,
+                arrayToCollectionTime,
+                addItemTime,
+                addItemToPositionTime,
+                setItemTime,
+                removeItemByPositionTime,
+                removeItemTime);
+
+
+        // Тестируем методы LinkedList
+        System.out.println("\nТестируем LinkedList\n");
+
+        startTime = System.nanoTime();
+        LinkedList<String> stringLinkedList = new LinkedList<>(stringList);
+        long arrayListToLinkedListTime = System.nanoTime() - startTime;
+        System.out.println("LinkedList<String> stingLinkedList = " + stringLinkedList);
+
+        startTime = System.nanoTime();
+        stringLinkedList.add("Six");
+        addItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после добавления элемента: " + stringLinkedList);
+
+        startTime = System.nanoTime();
+        stringLinkedList.add(1, "Another One");
+        addItemToPositionTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после добавления элемента в середину списка: " + stringLinkedList);
+
+        startTime = System.nanoTime();
+        stringLinkedList.set(6, "New Six");
+        setItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после замены элемента: " + stringLinkedList);
+
+        startTime = System.nanoTime();
+        stringLinkedList.remove(6);
+        removeItemByPositionTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после удаления элемента по индексу: " + stringLinkedList);
+
+        startTime = System.nanoTime();
+        stringLinkedList.remove("Five");
+        removeItemTime = System.nanoTime() - startTime;
+
+        System.out.println("Список после удаления элемента: " + stringLinkedList);
+
+        System.out.println();
+
+        System.out.printf("Время на конвертацию ArrayList в LinkedList: %d, нс;\n" +
+                        "Время на добавления элемента в  конец в LinkedList: %d, нс;\n" +
+                        "Время на добавления элемента на конкретную позицию в LinkedList: %d, нс;\n" +
+                        "Время на изменение элемента в LinkedList: %d, нс;\n" +
+                        "Время на удаление элемента по индексу из LinkedList: %d, нс;\n" +
+                        "Время на удаление элемента из LinkedList: %d, нс;\n",
+                arrayListToLinkedListTime,
+                addItemTime,
+                addItemToPositionTime,
+                setItemTime,
+                removeItemByPositionTime,
+                removeItemTime);
+
+        LinkedList<Cat> catLinkedList = new LinkedList<>();
+        catLinkedList.add(new Cat("Пушок", 11));
+        catLinkedList.add(new Cat("Мурка", 10));
+        catLinkedList.add(new Cat("Луна", 10));
+
+        System.out.println("\nТестируем итераторы\n");
+
+        Iterator<String> stringIterator = stringLinkedList.iterator();
+        while (stringIterator.hasNext()) {
+            System.out.println(stringIterator.next().toString());
+            stringIterator.remove();
+        }
+
+        Iterator<Cat> catIterator = catLinkedList.iterator();
+        while (catIterator.hasNext()) {
+            System.out.println(catIterator.next().toString());
+            catIterator.remove();
+        }
     }
 
     public static void testArrayMethods() {
@@ -237,6 +412,7 @@ public class Application {
         cats.add(new Cat("Simba", 10));
         cats.add(new Cat("Tiger", 13));
         cats.add(new Cat("Max", 12));
+
 
         for (Cat cat : cats) {
             cat.printInfo();
