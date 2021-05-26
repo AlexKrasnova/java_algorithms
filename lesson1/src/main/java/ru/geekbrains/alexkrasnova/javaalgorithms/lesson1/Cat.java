@@ -30,4 +30,11 @@ public class Cat {
         System.out.printf("Cat %s, weight %d\n", name, weight);
     }
 
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }
