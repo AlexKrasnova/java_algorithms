@@ -41,7 +41,7 @@ public class Application {
 
         list.display();
 
-        System.out.println("Удаляем элемент " + list.delete().getValue());
+        System.out.println("Удаляем элемент " + list.delete());
 
         list.display();
 

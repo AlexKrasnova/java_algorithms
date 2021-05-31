@@ -19,10 +19,23 @@ public class SinglyLinkedList<T> {
         this.first = item;
     }
 
-    public SinglyLinkedListItem<T> delete() {
+    public void insertLast(T value) {
+        SinglyLinkedListItem<T> item = new SinglyLinkedListItem<>(value);
+        if (isEmpty()) {
+            first = item;
+            return;
+        }
+        SinglyLinkedListItem<T> lastItem = first;
+        while (lastItem.hasNext()) {
+            lastItem = lastItem.getNext();
+        }
+        lastItem.setNext(item);
+    }
+
+    public T delete() {
         SinglyLinkedListItem<T> temp = first;
         first = first.getNext();
-        return temp;
+        return temp.getValue();
     }
 
     public void display() {
@@ -36,12 +49,16 @@ public class SinglyLinkedList<T> {
     public T find(T soughtForItem) {
         SinglyLinkedListItem<T> current = first;
         while (current != null) {
-            if(current.getValue().equals(soughtForItem)) {
+            if (current.getValue().equals(soughtForItem)) {
                 return current.getValue();
             }
             current = current.getNext();
         }
         return null;
+    }
+
+    public T getFirstElement() {
+        return first.getValue();
     }
 
 }
